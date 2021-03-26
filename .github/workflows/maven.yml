@@ -30,10 +30,10 @@ jobs:
           step: restore
           
       - name: Test
-        run: pwd && ls -lah
+        run: mvn install:install-file -Dfile="lib/PTRLib-1.0.4.jar" -DgroupId="com.mia" -DartifactId=craftstudio -Dversion="1.0.4" -Dpackaging=jar -DgeneratePom=true
 
       - name: Build with Maven
-        run: mvn install:install-file lib/PTRLib-1.0.4.jar && mvn clean && mvn -B package --file pom.xml
+        run: mvn clean && mvn -B package --file pom.xml
 
       - name: Set Release version env variable
         run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV

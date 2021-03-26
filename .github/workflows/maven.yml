@@ -28,6 +28,9 @@ jobs:
         uses: skjolber/maven-cache-github-action@v1
         with:
           step: restore
+          
+      - name: Test
+        run: pwd && ls -lah
 
       - name: Build with Maven
         run: mvn install:install-file lib/PTRLib-1.0.4.jar && mvn clean && mvn -B package --file pom.xml
